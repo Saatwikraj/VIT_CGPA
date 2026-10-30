@@ -18,13 +18,21 @@ public class myproject {
     System.out.printf("Your CGPA: %.2f",
         ((currentCGPA * currentCredits) + (estimateCGPA * creditsThisSem)) / (currentCredits + creditsThisSem));
     System.out.println();
-    System.out.print("Would you like to continue with the program? (Y/N): ");
-    String inp = sc.nextLine().toUpperCase();
-    if (inp.equals("Y")) {
-      choose_fn(sc);
-    } else if (inp.equals("N")) {
-      System.out.println("Hope to see you again!");
+  }
+
+  public static double getMarks(Scanner sc, String examName, double weight) {
+    System.out.print(examName + " done?(Y/N): ");
+    if (sc.nextLine().toUpperCase().equals("Y")) {
+      System.out.print("Enter your " + examName + " marks: ");
+      double marks = sc.nextDouble();
+      System.out.print("Enter your " + examName + " average: ");
+      double avg = sc.nextDouble();
+      sc.nextLine();
+      System.out.println();
+      return (marks - avg) * weight;
     }
+    System.out.println();
+    return 0.0;
   }
 
   public static void estimateAvg(Scanner sc) {
@@ -39,104 +47,15 @@ public class myproject {
     sc.nextLine();
     System.out.println();
 
-    System.out.print("CAT1 done?(Y/N): ");
-    String i1 = sc.nextLine();
-    double mycat1 = 0.0;
-    double cat1avg = 0.0;
-    if (i1.toUpperCase().equals("Y")) {
-      System.out.print("Enter your CAT1 marks: ");
-      mycat1 = sc.nextDouble();
-      System.out.print("Enter your CAT1 average: ");
-      cat1avg = sc.nextDouble();
-      sc.nextLine();
-    }
-    double diff1 = mycat1 - cat1avg;
-    aboveavg += diff1 * 0.3;
-    System.out.println();
+    aboveavg += getMarks(sc, "CAT1", 0.3);
+    aboveavg += getMarks(sc, "CAT2", 0.3);
+    aboveavg += getMarks(sc, "Quiz1", 1.0);
+    aboveavg += getMarks(sc, "Quiz2", 1.0);
+    aboveavg += getMarks(sc, "Quiz3", 1.0);
+    aboveavg += getMarks(sc, "FAT", 0.4);
 
-    System.out.print("CAT2 done?(Y/N): ");
-    String i2 = sc.nextLine();
-    double mycat2 = 0.0;
-    double cat2avg = 0.0;
-    if (i2.toUpperCase().equals("Y")) {
-      System.out.print("Enter your CAT2 marks: ");
-      mycat2 = sc.nextDouble();
-      System.out.print("Enter your CAT2 average: ");
-      cat2avg = sc.nextDouble();
-      sc.nextLine();
-    }
-    double diff2 = mycat2 - cat2avg;
-    aboveavg += diff2 * 0.3;
-    System.out.println();
-
-    System.out.print("Quiz1 done?(Y/N): ");
-    String i3 = sc.nextLine();
-    double myquiz1 = 0.0;
-    double quiz1avg = 0.0;
-    if (i3.toUpperCase().equals("Y")) {
-      System.out.print("Enter your Quiz1 marks: ");
-      myquiz1 = sc.nextDouble();
-      System.out.print("Enter your Quiz1 average: ");
-      quiz1avg = sc.nextDouble();
-      sc.nextLine();
-    }
-    double diff3 = myquiz1 - quiz1avg;
-    aboveavg += diff3;
-    System.out.println();
-
-    System.out.print("Quiz2 done?(Y/N): ");
-    String i4 = sc.nextLine();
-    double myquiz2 = 0.0;
-    double quiz2avg = 0.0;
-    if (i4.toUpperCase().equals("Y")) {
-      System.out.print("Enter your Quiz2 marks: ");
-      myquiz2 = sc.nextDouble();
-      System.out.print("Enter your Quiz2 average: ");
-      quiz2avg = sc.nextDouble();
-      sc.nextLine();
-    }
-    double diff4 = myquiz2 - quiz2avg;
-    aboveavg += diff4;
-    System.out.println();
-
-    System.out.print("Quiz3 done?(Y/N): ");
-    String i5 = sc.nextLine();
-    double myquiz3 = 0.0;
-    double quiz3avg = 0.0;
-    if (i5.toUpperCase().equals("Y")) {
-      System.out.print("Enter your Quiz3 marks: ");
-      myquiz3 = sc.nextDouble();
-      System.out.print("Enter your Quiz3 average: ");
-      quiz3avg = sc.nextDouble();
-      sc.nextLine();
-    }
-    double diff5 = myquiz3 - quiz3avg;
-    aboveavg += diff5;
-    System.out.println();
-
-    System.out.print("FAT done?(Y/N): ");
-    String i6 = sc.nextLine();
-    double myfat = 0.0;
-    double fatavg = 0.0;
-    if (i6.toUpperCase().equals("Y")) {
-      System.out.print("Enter your FAT marks: ");
-      myfat = sc.nextDouble();
-      System.out.print("Enter your FAT average: ");
-      fatavg = sc.nextDouble();
-      sc.nextLine();
-    }
-    double diff6 = myfat - fatavg;
-    aboveavg += diff6 * 0.4;
-    System.out.println();
     System.out.printf("Your marks above average = %.2f", aboveavg * thw);
     System.out.println();
-    System.out.print("Would you like to continue with the program? (Y/N): ");
-    String inp = sc.nextLine().toUpperCase();
-    if (inp.equals("Y")) {
-      choose_fn(sc);
-    } else if (inp.equals("N")) {
-      System.out.println("Hope to see you again!");
-    }
   }
 
   public static void CGPAFromGrades(Scanner sc) {
@@ -180,16 +99,9 @@ public class myproject {
     }
     System.out.printf("Your CGPA based on your grades = %.2f", totalval / totalcreds);
     System.out.println();
-    System.out.print("Would you like to continue with the program? (Y/N): ");
-    String inp = sc.nextLine().toUpperCase();
-    if (inp.equals("Y")) {
-      choose_fn(sc);
-    } else if (inp.equals("N")) {
-      System.out.println("Hope to see you again!");
-    }
   }
 
-  public static void targetCGPA(Scanner sc){
+  public static void targetCGPA(Scanner sc) {
     System.out.print("Enter your current CGPA: ");
     double currentCGPA = sc.nextDouble();
     System.out.print("Enter your current no of credits done: ");
@@ -197,7 +109,7 @@ public class myproject {
     System.out.println();
     System.out.print("Enter your target CGPA: ");
     double target = sc.nextDouble();
-    if (target<currentCGPA){
+    if (target < currentCGPA) {
       System.out.println("Choose a target better than your current CGPA");
       choose_fn(sc);
       return;
@@ -206,23 +118,15 @@ public class myproject {
     int nextsemcredits = sc.nextInt();
     sc.nextLine();
 
-    double fullval = target * (nextsemcredits+currentCredits);
-    double requiredgpa = (fullval-(currentCGPA*currentCredits))/(nextsemcredits);
+    double fullval = target * (nextsemcredits + currentCredits);
+    double requiredgpa = (fullval - (currentCGPA * currentCredits)) / (nextsemcredits);
 
-    if (requiredgpa<=10.0){
-      System.out.printf("Your target GPA for next sem should be: %.2f",requiredgpa);
-    }
-    else{
+    if (requiredgpa <= 10.0) {
+      System.out.printf("Your target GPA for next sem should be: %.2f", requiredgpa);
+    } else {
       System.out.println("This target is mathematically impossible");
     }
     System.out.println();
-    System.out.print("Would you like to continue with the program? (Y/N): ");
-    String inp = sc.nextLine().toUpperCase();
-    if (inp.equals("Y")) {
-      choose_fn(sc);
-    } else if (inp.equals("N")) {
-      System.out.println("Hope to see you again!");
-    }
   }
 
   public static void choose_fn(Scanner sc) {
@@ -235,6 +139,8 @@ public class myproject {
     System.out.print("Choose your option: ");
     int choice = sc.nextInt();
     System.out.println();
+    sc.nextLine();
+
     if (choice == 1) {
       calculateCGPA(sc);
     } else if (choice == 2) {
@@ -245,9 +151,20 @@ public class myproject {
       targetCGPA(sc);
     } else if (choice == 5) {
       System.out.print("Thanks! Hope to see you again!");
+      return;
     } else {
       System.out.println("Enter valid choice.");
       choose_fn(sc);
+      return;
+    }
+
+    System.out.println();
+    System.out.print("Would you like to continue with the program? (Y/N): ");
+    String inp = sc.nextLine().toUpperCase();
+    if (inp.equals("Y")) {
+      choose_fn(sc);
+    } else if (inp.equals("N")) {
+      System.out.println("Hope to see you again!");
     }
   }
 
