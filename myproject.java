@@ -13,9 +13,18 @@ public class myproject {
     double estimateCGPA = sc.nextDouble();
     System.out.print("Enter current credits of this semester: ");
     double creditsThisSem = sc.nextDouble();
+    sc.nextLine();
 
     System.out.printf("Your CGPA: %.2f",
         ((currentCGPA * currentCredits) + (estimateCGPA * creditsThisSem)) / (currentCredits + creditsThisSem));
+    System.out.println();
+    System.out.print("Would you like to continue with the program? (Y/N): ");
+    String inp = sc.nextLine().toUpperCase();
+    if (inp.equals("Y")) {
+      choose_fn(sc);
+    } else if (inp.equals("N")) {
+      System.out.println("Hope to see you again!");
+    }
   }
 
   public static void estimateAvg(Scanner sc) {
@@ -120,6 +129,14 @@ public class myproject {
     aboveavg += diff6 * 0.4;
     System.out.println();
     System.out.printf("Your marks above average = %.2f", aboveavg * thw);
+    System.out.println();
+    System.out.print("Would you like to continue with the program? (Y/N): ");
+    String inp = sc.nextLine().toUpperCase();
+    if (inp.equals("Y")) {
+      choose_fn(sc);
+    } else if (inp.equals("N")) {
+      System.out.println("Hope to see you again!");
+    }
   }
 
   public static void CGPAFromGrades(Scanner sc) {
@@ -162,29 +179,44 @@ public class myproject {
       }
     }
     System.out.printf("Your CGPA based on your grades = %.2f", totalval / totalcreds);
+    System.out.println();
+    System.out.print("Would you like to continue with the program? (Y/N): ");
+    String inp = sc.nextLine().toUpperCase();
+    if (inp.equals("Y")) {
+      choose_fn(sc);
+    } else if (inp.equals("N")) {
+      System.out.println("Hope to see you again!");
+    }
   }
 
-  public static void main(String[] args) {
-    Scanner sc = new Scanner(System.in);
-    System.out.println("Hello user!!!");
-    System.out.println();
+  public static void choose_fn(Scanner sc) {
     System.out.println("1) Calculate CGPA");
     System.out.println("2) Estimate your average");
     System.out.println("3) CGPA from base");
+    System.out.println("4) Quit program");
     System.out.println();
     System.out.print("Choose your option: ");
     int choice = sc.nextInt();
     System.out.println();
-
     if (choice == 1) {
       calculateCGPA(sc);
     } else if (choice == 2) {
       estimateAvg(sc);
     } else if (choice == 3) {
       CGPAFromGrades(sc);
+    } else if (choice == 4) {
+      System.out.print("Thanks! Hope to see you again!");
     } else {
       System.out.println("Enter valid choice.");
+      choose_fn(sc);
     }
+  }
+
+  public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    System.out.println("Hello user!!!");
+    System.out.println();
+    choose_fn(sc);
     sc.close();
   }
 }
