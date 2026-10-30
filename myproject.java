@@ -189,11 +189,48 @@ public class myproject {
     }
   }
 
+  public static void targetCGPA(Scanner sc){
+    System.out.print("Enter your current CGPA: ");
+    double currentCGPA = sc.nextDouble();
+    System.out.print("Enter your current no of credits done: ");
+    int currentCredits = sc.nextInt();
+    System.out.println();
+    System.out.print("Enter your target CGPA: ");
+    double target = sc.nextDouble();
+    if (target<currentCGPA){
+      System.out.println("Choose a target better than your current CGPA");
+      choose_fn(sc);
+      return;
+    }
+    System.out.print("Enter next sem credits: ");
+    int nextsemcredits = sc.nextInt();
+    sc.nextLine();
+
+    double fullval = target * (nextsemcredits+currentCredits);
+    double requiredgpa = (fullval-(currentCGPA*currentCredits))/(nextsemcredits);
+
+    if (requiredgpa<=10.0){
+      System.out.printf("Your target GPA for next sem should be: %.2f",requiredgpa);
+    }
+    else{
+      System.out.println("This target is mathematically impossible");
+    }
+    System.out.println();
+    System.out.print("Would you like to continue with the program? (Y/N): ");
+    String inp = sc.nextLine().toUpperCase();
+    if (inp.equals("Y")) {
+      choose_fn(sc);
+    } else if (inp.equals("N")) {
+      System.out.println("Hope to see you again!");
+    }
+  }
+
   public static void choose_fn(Scanner sc) {
     System.out.println("1) Calculate CGPA");
     System.out.println("2) Estimate your average");
     System.out.println("3) CGPA from base");
-    System.out.println("4) Quit program");
+    System.out.println("4) Target CGPA for next sem");
+    System.out.println("5) Quit program");
     System.out.println();
     System.out.print("Choose your option: ");
     int choice = sc.nextInt();
@@ -205,6 +242,8 @@ public class myproject {
     } else if (choice == 3) {
       CGPAFromGrades(sc);
     } else if (choice == 4) {
+      targetCGPA(sc);
+    } else if (choice == 5) {
       System.out.print("Thanks! Hope to see you again!");
     } else {
       System.out.println("Enter valid choice.");
